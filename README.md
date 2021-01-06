@@ -12,6 +12,10 @@ install_github("Zeroh729/popPCR")
 ```
 
 ## Usage
+```
+popPCR(x, dist = "t")
+```
+
 3 example datasets are available upon import
 ```r
 library(popPCR)
@@ -20,7 +24,7 @@ hist(x_onePop, breaks = 100)     # dPCR sample w/ 1 population
 hist(x_twoPop, breaks = 100)     # dPCR sample w/ 2 populations
 hist(x_multiPop, breaks = 100)   # dPCR sample w/ >=3 populations
 ```
-
+  
 Case 1. One population sample
 ```r
 result <- popPCR(x_onePop, dist = "t")
@@ -42,7 +46,7 @@ result <- popPCR(x_onePop, dist = "t", negProbThres = 1e-4)
 #        Target copies in sample          : 2125.5312 ( 95% CI: [ 1966.9936 , 2284.0688 ] )
 #        Mean target copies per partition : 0.0903 ( 95% CI: [ 0.0836 , 0.0971 ] )
 ```
-
+  
 Case 2. Two population sample
 ```r
 result <- popPCR(x_twoPop, dist = "t")
@@ -54,7 +58,7 @@ result <- popPCR(x_twoPop, dist = "t")
 #        Target copies in sample          : 44290.3819 ( 95% CI: [ 43215.6408 , 45365.1231 ] )
 #        Mean target copies per partition : 1.8823 ( 95% CI: [ 1.8367 , 1.928 ] )
 ```
-
+  
 Case 3. Multiple population sample
 ```r
 result <- popPCR(x_multiPop, dist = "t", maxComponents = 4)
@@ -88,7 +92,7 @@ newEstimates
 #           conc    upper    lower
 #       4315.875 4801.719 3830.031
 ```
-
+  
 Print results summary
 ```r
 result <- popPCR(x_twoPop, dist = "t")
@@ -107,6 +111,9 @@ printSummaryFit(result)
 #        Sigma     : 42621.1894
 #        Dof       : 2.415
 ```
+  
+Available `dist` values : `normal`, `skewed-normal`, `t`, and `skewed-t`  
+Use `?popPCR` to view complete documentation.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
