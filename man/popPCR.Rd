@@ -46,6 +46,7 @@ Estimates target concentration by counting positive droplets with Poisson correc
 }
 \examples{
 library(popPCR)
+
 # Plot histograms of available data
 hist(x_onePop, breaks = 100)
 hist(x_twoPop, breaks = 100)
@@ -53,7 +54,7 @@ hist(x_multiPop, breaks = 100)
 
 # ---- Mixture model fitting ---- #
 # Example 1. One population sample
-result <- popPCR(x_onePop, dist = "t")  # available dist values ("normal", "skewed-normal", "t", "skewed-t")
+result <- popPCR(x_onePop, dist = "t")
 printSummaryConc(result)
 #    Output:
 #        Populations detected : 1
@@ -72,7 +73,9 @@ printSummaryFit(result)
 #        Mu        : 1024.1614
 #        Sigma     : 35253.1747
 #        Dof       : 2.005
-result <- popPCR(x_onePop, dist = "t", negProbThres = 1e-4)  # increasing negProbThres makes negative classification stricter
+
+# (Option) increase negProbThres to classify negative droplets more strictly
+result <- popPCR(x_onePop, dist = "t", negProbThres = 1e-4)
 printSummaryConc(result)
 #    Output:
 #        Populations detected : 1

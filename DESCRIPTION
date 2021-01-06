@@ -1,5 +1,5 @@
 Package: popPCR
-Title: Estimates Population Parameters of Digitial PCR Amplitudes Using Expectation Maximization
+Title: Fit Droplet Fluorescence Populations of dPCR Amplitude Data Using Expectation Maximization
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Joyce Emlyn",
