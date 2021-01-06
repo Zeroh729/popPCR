@@ -1,0 +1,21 @@
+Package: popPCR
+Title: Estimates Population Parameters of Digitial PCR Amplitudes Using Expectation Maximization
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Joyce Emlyn",
+           family = "Guiao",
+           role = c("aut", "cre"),
+           email = "joyce_emlyn_guiao@dlsu.edu.ph")
+Description: Estimates of DNA target concentration by classifying droplets as positive, negative, or rain, using Mixture Model Clustering. Fitting is done using EMMIXskew package (v. 1.0.3) by Kui Wang, Angus Ng and Geoff McLachlan (2018).
+Imports: EMMIXskew
+Remotes: github::cran/EMMIXskew
+Depends: 
+    graphics,
+    stats,
+    grDevices,
+    R (>= 2.10)
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
