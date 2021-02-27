@@ -24,8 +24,8 @@ printSummaryConc <- function(result.popPCR){
       Negative : ", r@dropletCount$neg, " (",negPct,"%)
       ",summaryRain,"
       Target copies in sample          : ", conc[['conc']],  " ( 95% CI: [ ", conc[['lower']]," , ", conc[['upper']]," ] )
-      Mean target copies per partition : ", lamb[['lambda']]," ( 95% CI: [ ", lamb[['lower']]," , ", lamb[['upper']]," ] )
-      "))
+      Mean target copies per partition : ", lamb[['lambda']]," ( 95% CI: [ ", lamb[['lower']]," , ", lamb[['upper']]," ] )"))
+  writeLines("")
 }
 
 #' Print fitted mixture model estimates from popPCR
@@ -57,4 +57,5 @@ printSummaryFit <- function(result.popPCR){
     if(hasDof)   cat(paste0("\n        Dof       : ", round(r@em$dof[i],4)))
     if(hasDelta) cat(paste0("\n        Delta     : ", round(r@em$delta[i],4)))
   }
+  writeLines("")
 }

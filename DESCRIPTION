@@ -1,14 +1,13 @@
 Package: popPCR
-Title: Fit Droplet Fluorescence Populations of dPCR Amplitude Data Using Expectation Maximization
-Version: 0.0.0.9000
+Title: Classify Digital PCR Droplets by Fitting Fluorescence Populations Using Expectation Maximization
+Version: 0.1.0
 Authors@R: 
     person(given = "Joyce Emlyn",
            family = "Guiao",
            role = c("aut", "cre"),
            email = "joyce_emlyn_guiao@dlsu.edu.ph")
-Description: Estimates DNA target concentration by classifying droplets as positive, negative, or rain, using Mixture Model Clustering. Fitting is done using EMMIXskew package (v. 1.0.3) by Kui Wang, Angus Ng and Geoff McLachlan (2018).
-Imports: EMMIXskew
-Remotes: github::cran/EMMIXskew
+Description: Estimates DNA target concentration by classifying digital PCR droplets as positive, negative, or rain, using Mixture Model Clustering. Fitting is done using EMMIXskew package (v. 1.0.3) by Kui Wang, Angus Ng and Geoff McLachlan (2018) from their paper "Multivariate Skew t Mixture Models: Applications to Fluorescence-Activated Cell Sorting Data" <doi:10.1109/DICTA.2009.88>.
+Imports: lattice, mvtnorm, KernSmooth
 Depends: 
     graphics,
     stats,
@@ -16,7 +15,9 @@ Depends:
     grDevices,
     R (>= 2.10)
 License: GPL (>= 3)
+LazyLoad: yes
 Encoding: UTF-8
 LazyData: true
+NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

@@ -19,6 +19,11 @@
 #'   \item memberProb - list, component membership probability of all droplets
 #' }
 #' @importFrom methods new
+#' @importFrom mvtnorm rmvnorm
+#' @importFrom grDevices colorRampPalette contourLines densCols dev.new dev.off png
+#' @importFrom graphics contour lines pairs par points smoothScatter
+#' @importFrom stats as.dist cor cutree density hclust kmeans quantile rgamma rnorm uniroot
+#' @useDynLib popPCR, .registration = TRUE
 #' @export
 #' @examples
 #' library(popPCR)
@@ -138,7 +143,7 @@ popPCR <- function(x, dist, volSamp=20, volDrp=0.85, maxComponents=Inf, negProbT
                      delta = t(matrix(rep(0,G))))
   df_x <- data.frame(Fluorescence=x)
   distr <- ..distr[[dist]]
-  em <- EMMIXskew::EmSkew(df_x, init = initEMSkew, g = G, distr = distr, ncov = 3, debug = FALSE)
+  em <- EmSkew(df_x, init = initEMSkew, g = G, distr = distr, ncov = 3, debug = FALSE)
 
   probs <- ..getClusMemberProb(x, em, useOnlyNegProbThres, negProbThres)
   negMemberProb   <- probs$negMemberProb
@@ -272,16 +277,16 @@ popPCR <- function(x, dist, volSamp=20, volDrp=0.85, maxComponents=Inf, negProbT
     df <- em$dof[1]
     x_mayBePos <- x[x > mean]
     if(em$distr == "mvn"){
-      d <- EMMIXskew::ddmvn(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma)
+      d <- ddmvn(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma)
     }
     else if(em$distr == "msn"){
-      d <- EMMIXskew::ddmsn(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, del =  em$delta[1,1])
+      d <- ddmsn(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, del =  em$delta[1,1])
     }
     else if(em$distr == "mvt"){
-      d <- EMMIXskew::ddmvt(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, nu = df)
+      d <- ddmvt(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, nu = df)
     }
     else if(em$distr == "mst"){
-      d <- EMMIXskew::ddmst(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, nu = df, del =  em$delta[1,1])
+      d <- ddmst(matrix(x_mayBePos, ncol=1), n=length(x_mayBePos), p=1, mean=mean, cov=sigma, nu = df, del =  em$delta[1,1])
     }
     surenegs <- length(x)-length(x_mayBePos)
     i_pos <- which(d < negProbThres) + surenegs
