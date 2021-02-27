@@ -15,30 +15,30 @@ popPCR(
 )
 }
 \arguments{
-\item{x}{numerical, vector of droplet fluorescence amplitude}
+\item{x}{numeric, vector of droplet fluorescence amplitude}
 
 \item{dist}{character, distribution of the mixture models ("normal", "skewed-normal", "t", "skewed-t")}
 
-\item{volSamp}{numerical, sample volume in microliter}
+\item{volSamp}{numeric, sample volume in microliter}
 
-\item{volDrp}{numerical, droplet (or partition) volume in nanoliter}
+\item{volDrp}{numeric, droplet (or partition) volume in nanoliter}
 
-\item{maxComponents}{numerical, maximum number of components}
+\item{maxComponents}{numeric, maximum number of components}
 
-\item{negProbThres}{numerical, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.}
+\item{negProbThres}{numeric, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.}
 
 \item{useOnlyNegProbThres}{logical, if TRUE, then droplets will be classified as positive if its probability given the leftmost population < negProbThres. Default is FALSE, i.e. classification is done by Maximum A Posteriori rule.}
 }
 \value{
 Returns a \code{result.popPCR} S4 class object with attributes
 \itemize{
-\item estConc - list, estimated target concentration as lambda and sample concentration (with 95\% CI)
-\item memberProb - list, component membership probability of all droplets
-\item G - numeric, number of components fitted
-\item em - list, returned value of EMMIXskew's EmSkew()
-\item dropletCount - list, droplet classification count
 \item classification - character, vector of droplet classification
 \item dist - character, user-specified parameter for the mixture model
+\item dropletCount - list, droplet classification count
+\item em - list, returned value of EMMIXskew's EmSkew()
+\item estConc - list, estimated target concentration as lambda and sample concentration (with 95\% CI)
+\item G - numeric, number of components fitted
+\item memberProb - list, component membership probability of all droplets
 }
 }
 \description{
@@ -129,7 +129,7 @@ printSummaryConc(result)
 #        Mean target copies per partition : 0.3708 ( 95\% CI: [ 0.34 , 0.4016 ] )
 
 # In the output above, we see 2 rain populations! Let's examine its plot.
-plot(density(x_multiPop))
+plot(stats::density(x_multiPop))
 # We can see that Rain (1) is very close to the Negative population.
 # Let's include droplets in Rain (1) in the negative droplet count.
 nNegative <- result@dropletCount$neg + result@dropletCount$rain1

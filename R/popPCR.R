@@ -1,23 +1,24 @@
 #' EM Mixture Model fitting of dPCR droplet fluorescence
 #'
 #' Estimates target concentration by counting positive droplets with Poisson correction. Positive, negative, and rain populations are fitted using EM. Droplets are then classified using Maximum A Posteriori rule
-#' @param x numerical, vector of droplet fluorescence amplitude
+#' @param x numeric, vector of droplet fluorescence amplitude
 #' @param dist character, distribution of the mixture models ("normal", "skewed-normal", "t", "skewed-t")
-#' @param volSamp numerical, sample volume in microliter
-#' @param volDrp  numerical, droplet (or partition) volume in nanoliter
-#' @param maxComponents numerical, maximum number of components
-#' @param negProbThres numerical, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.
+#' @param volSamp numeric, sample volume in microliter
+#' @param volDrp  numeric, droplet (or partition) volume in nanoliter
+#' @param maxComponents numeric, maximum number of components
+#' @param negProbThres numeric, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.
 #' @param useOnlyNegProbThres logical, if TRUE, then droplets will be classified as positive if its probability given the leftmost population < negProbThres. Default is FALSE, i.e. classification is done by Maximum A Posteriori rule.
 #' @return Returns a `result.popPCR` S4 class object with attributes
 #' \itemize{
-#'   \item estConc - list, estimated target concentration as lambda and sample concentration (with 95% CI)
-#'   \item memberProb - list, component membership probability of all droplets
-#'   \item G - numeric, number of components fitted
-#'   \item em - list, returned value of EMMIXskew's EmSkew()
-#'   \item dropletCount - list, droplet classification count
 #'   \item classification - character, vector of droplet classification
 #'   \item dist - character, user-specified parameter for the mixture model
+#'   \item dropletCount - list, droplet classification count
+#'   \item em - list, returned value of EMMIXskew's EmSkew()
+#'   \item estConc - list, estimated target concentration as lambda and sample concentration (with 95% CI)
+#'   \item G - numeric, number of components fitted
+#'   \item memberProb - list, component membership probability of all droplets
 #' }
+#' @importFrom methods new
 #' @export
 #' @examples
 #' library(popPCR)
@@ -104,7 +105,7 @@
 #' #        Mean target copies per partition : 0.3708 ( 95% CI: [ 0.34 , 0.4016 ] )
 #'
 #' # In the output above, we see 2 rain populations! Let's examine its plot.
-#' plot(density(x_multiPop))
+#' plot(stats::density(x_multiPop))
 #' # We can see that Rain (1) is very close to the Negative population.
 #' # Let's include droplets in Rain (1) in the negative droplet count.
 #' nNegative <- result@dropletCount$neg + result@dropletCount$rain1
@@ -125,7 +126,7 @@ popPCR <- function(x, dist, volSamp=20, volDrp=0.85, maxComponents=Inf, negProbT
   if(!dist %in% names(..distr)){
     stop(paste0("Invalid dist. Select one `", paste0(names(..distr), collapse="`, `"), "`"))
   }
-  x <- na.omit(x)
+  x <- stats::na.omit(x)
   x <- sort(x)
 
   modes <- ..getInitMus(x, maxComponents = maxComponents)
@@ -170,11 +171,11 @@ popPCR <- function(x, dist, volSamp=20, volDrp=0.85, maxComponents=Inf, negProbT
 }
 
 ..getInitMus <- function(x, maxComponents=Inf){
-  kerbw <- bw.nrd0(x)
+  kerbw <- stats::bw.nrd0(x)
   if(kerbw < 50){
     kerbw <- 50
   }
-  krn <- density(x, bw = kerbw)
+  krn <- stats::density(x, bw = kerbw)
   krn <- rbind(krn$y, krn$x)
 
   piek <- ..findpeaks(krn[1, ], bw=20)$max.X
@@ -303,12 +304,12 @@ popPCR <- function(x, dist, volSamp=20, volDrp=0.85, maxComponents=Inf, negProbT
              "t"             = "mvt",
              "skewed-t"      = "mst")
 
-result.popPCR <- setClass("result.popPCR", slots=list(
-  estConc = "list",
-  memberProb = "list",
-  G = "numeric",
+result.popPCR <- methods::setClass("result.popPCR", slots=list(
+  classification = "factor",
   dist = "character",
-  em = "list",
   dropletCount = "list",
-  classification = "factor"
+  em = "list",
+  estConc = "list",
+  G = "numeric",
+  memberProb = "list"
 ))

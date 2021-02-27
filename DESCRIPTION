@@ -6,12 +6,13 @@ Authors@R:
            family = "Guiao",
            role = c("aut", "cre"),
            email = "joyce_emlyn_guiao@dlsu.edu.ph")
-Description: Estimates of DNA target concentration by classifying droplets as positive, negative, or rain, using Mixture Model Clustering. Fitting is done using EMMIXskew package (v. 1.0.3) by Kui Wang, Angus Ng and Geoff McLachlan (2018).
+Description: Estimates DNA target concentration by classifying droplets as positive, negative, or rain, using Mixture Model Clustering. Fitting is done using EMMIXskew package (v. 1.0.3) by Kui Wang, Angus Ng and Geoff McLachlan (2018).
 Imports: EMMIXskew
 Remotes: github::cran/EMMIXskew
 Depends: 
     graphics,
     stats,
+    methods,
     grDevices,
     R (>= 2.10)
 License: GPL (>= 3)

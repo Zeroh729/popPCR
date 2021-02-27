@@ -7,17 +7,14 @@
 calculateConc(nneg, ntotal, volSamp, volDrp)
 }
 \arguments{
-\item{nneg}{numerical, negative droplet count}
+\item{nneg}{numeric, negative droplet count}
 
-\item{ntotal}{numerical, total droplet count}
+\item{ntotal}{numeric, total droplet count}
 
-\item{volSamp}{numerical, sample volume in microliter}
+\item{volSamp}{numeric, sample volume in microliter}
 
-\item{volDrp}{numerical, droplet (or partition) volume in nanoliter}
+\item{volDrp}{numeric, droplet (or partition) volume in nanoliter}
 }
 \description{
 Mean target copies per partition (lambda) is derived using Poisson distribution as lambda = -ln(nneg / ntot). Target copies in sample is then calculated as conc = lambda * volSamp/(volDrp * 1000).
-}
-\examples{
-
 }

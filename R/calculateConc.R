@@ -2,12 +2,11 @@
 #'
 #' Mean target copies per partition (lambda) is derived using Poisson distribution as lambda = -ln(nneg / ntot). Target copies in sample is then calculated as conc = lambda * volSamp/(volDrp * 1000).
 #'
-#' @param nneg numerical, negative droplet count
-#' @param ntotal numerical, total droplet count
-#' @param volSamp numerical, sample volume in microliter
-#' @param volDrp  numerical, droplet (or partition) volume in nanoliter
+#' @param nneg numeric, negative droplet count
+#' @param ntotal numeric, total droplet count
+#' @param volSamp numeric, sample volume in microliter
+#' @param volDrp  numeric, droplet (or partition) volume in nanoliter
 #' @export
-#' @examples
 #'
 calculateConc <- function(nneg, ntotal, volSamp, volDrp){
   res <- list()
