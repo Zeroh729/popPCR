@@ -5,7 +5,7 @@
 #' @param dist character, distribution of the mixture models ("normal", "skewed-normal", "t", "skewed-t")
 #' @param volSamp numeric, sample volume in microliter
 #' @param volDrp  numeric, droplet (or partition) volume in nanoliter
-#' @param maxComponents numeric, maximum number of components
+#' @param maxComponents numeric, maximum number of components (e.g. populations)
 #' @param negProbThres numeric, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.
 #' @param useOnlyNegProbThres logical, if TRUE, then droplets will be classified as positive if its probability given the leftmost population < negProbThres. Default is FALSE, i.e. classification is done by Maximum A Posteriori rule.
 #' @return Returns a `result.popPCR` S4 class object with attributes

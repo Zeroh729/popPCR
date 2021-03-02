@@ -23,7 +23,7 @@ popPCR(
 
 \item{volDrp}{numeric, droplet (or partition) volume in nanoliter}
 
-\item{maxComponents}{numeric, maximum number of components}
+\item{maxComponents}{numeric, maximum number of components (e.g. populations)}
 
 \item{negProbThres}{numeric, if only one population was detected, then its assumed as a negative population. Droplets will be classified as positive if its probability given the population < negProbThres.}
 

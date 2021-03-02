@@ -10,5 +10,17 @@ printSummaryConc(result.popPCR)
 \item{result.popPCR}{returned value of popPCR()}
 }
 \description{
-Print result summary of popPCR
+Summarizes the number of populations detected, total droplets, and number of classified positive, negative, and rain droplets. Also calculates the target copies in sample and the mean target copies per partition (lambda).
+}
+\examples{
+result <- popPCR(x_twoPop, dist = "t")
+printSummaryConc(result)
+#    Output:
+#        Populations detected : 2
+#        Total droplets : 10254
+#        Positive : 8693 (84.78\%)
+#        Negative : 1561 (15.22\%)
+#
+#        Target copies in sample          : 44290.3819 ( 95\% CI: [ 43215.6408 , 45365.1231 ] )
+#        Mean target copies per partition : 1.8823 ( 95\% CI: [ 1.8367 , 1.928 ] )
 }
