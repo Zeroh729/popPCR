@@ -1,6 +1,6 @@
 Package: popPCR
 Title: Classify Digital PCR Droplets by Fitting Fluorescence Populations
-Version: 0.1.1
+Version: 0.1.1.1
 Authors@R: 
     person(given = "Joyce Emlyn",
            family = "Guiao",
