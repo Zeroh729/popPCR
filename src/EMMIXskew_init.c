@@ -2,21 +2,17 @@
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
-/* FIXME:
-   Check these declarations against the C/Fortran source code.
-*/
-
 /* .C calls */
-extern void ddmix2(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void emskewfit1(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void emskewfit2(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void initfit_(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void interdist_(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void intradist_(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void mahalonobis_(void *, void *, void *, void *, void *, void *);
+extern void ddmix2(double *, int *, int *, int *, int *, const double *, const double *, const double *, const double *, double *, int *);
+extern void emskewfit1(double *, int *, int *, int *, int *, int *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, int *, int *, int *, double *, int *);
+extern void emskewfit2(double *, int *, int *, int *, int *, int *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, int *, int *, int *, double *);
+extern void initfit_(double *, int *, int *, int *, int *, int *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, double *, int *, int *, int *);
+extern void interdist_(double *, int *, int *, int *, int *, double *, double *, double *, double *, int *);
+extern void intradist_(double *, int *, int *, int *, int *, double *, double *, double *, double *, int *);
+extern void mahalonobis_(int *, int *, double *, double *, double *, int *);
 
 /* .Fortran calls */
-extern void F77_NAME(inverse3)(void *, void *, void *, void *, void *, void *, void *);
+extern void F77_NAME(inverse3)(double *, double *, double *, int *, int *, int *, int *);
 
 static const R_CMethodDef CEntries[] = {
     {"ddmix2",       (DL_FUNC) &ddmix2,       11},
